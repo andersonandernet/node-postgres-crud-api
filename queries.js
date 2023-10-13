@@ -15,6 +15,15 @@ const pool = new Pool({
       .toString()
   }
 });
+const getVersion = (request, response) => {
+  pool.query('SELECT version()', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+  
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     if (error) {
@@ -78,6 +87,7 @@ const deleteUser = (request, response) => {
 };
 
 module.exports = {
+  getVersion,
   getUsers,
   getUserById,
   createUser,

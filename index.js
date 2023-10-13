@@ -1,3 +1,4 @@
+//https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -16,6 +17,7 @@ app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' });
 });
 
+app.get('/version', db.getVersion);
 app.get('/users', db.getUsers);
 app.get('/users/:id', db.getUserById);
 app.post('/users', db.createUser);
